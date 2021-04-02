@@ -26,7 +26,13 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      'core': {
+      '/api/v1/*': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true,
+        secure: false,
+        logLevel: 'debug',
+      },
+      '/ajax/*': {
         target: 'http://127.0.0.1:5000',
         changeOrigin: true,
         secure: false,

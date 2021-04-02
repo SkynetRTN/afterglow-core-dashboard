@@ -54,7 +54,7 @@
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import CardComponent from "./CardComponent.vue";
 import TokenModal from "./TokenModal.vue"
-import { coreConfig } from "../config";
+import { appConfig } from "../config";
 import { UserModule } from "../store/modules/user";
 import { AppModule } from "../store/modules/app";
 import { getServerStatus } from "../api/server-status";

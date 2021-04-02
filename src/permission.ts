@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login']
+const whiteList = ['/login', '/oauth2/authorized']
 
 router.beforeEach(async(to: Route, _: Route, next: any) => {
   // Start progress bar

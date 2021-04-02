@@ -4,15 +4,10 @@ import Cookies from 'js-cookie'
 import { getCsrfToken } from '../utils/cookies'
 import qs from 'qs'
 import camelCaseKeys from 'camelcase-keys';
-import {coreConfig as coreConfig} from '../config';
+import {appConfig} from '../config';
 
-export function getPublicApiUrl() {
-  return `${coreConfig.url}/api/${coreConfig.publicApiVersion}`
-}
-
-export function getAjaxApiUrl() {
-  return `${coreConfig.url}/ajax`
-}
+export const publicApiUrl = `${appConfig.coreUrl}/api/v1`;
+export const ajaxApiUrl = `${appConfig.coreUrl}/ajax`;
 
 export const apiClient = axios.create({
   timeout: 5000,
@@ -25,7 +20,7 @@ export const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     if (getCsrfToken()) {
-      config.headers[coreConfig.csrfHeaderName] = getCsrfToken()
+      config.headers[appConfig.csrfHeaderName] = getCsrfToken()
     }
     return config
   },

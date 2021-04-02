@@ -36,6 +36,14 @@ const routes = [
       },
       {
         meta: {
+          title: 'Oauth2Authorized'
+        },
+        path: '/oauth2/authorized',
+        name: 'oauth2-authorized',
+        component: () => import(/* webpackChunkName: "full-page" */ './views/full-page/Oauth2Authorized.vue')
+      },
+      {
+        meta: {
           title: 'Password Recovery'
         },
         path: '/password-recovery',
@@ -80,5 +88,6 @@ export default new Router({
     }
   },
   base: process.env.BASE_URL,
+  mode: 'history',
   routes: routes
 })

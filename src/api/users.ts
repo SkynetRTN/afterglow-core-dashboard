@@ -1,11 +1,17 @@
-import { apiClient, getPublicApiUrl, getAjaxApiUrl } from './api-client'
-import { User } from './types'
+import { apiClient, publicApiUrl, ajaxApiUrl } from "./api-client";
+import { User } from "./types";
 
 export const getUser = (userId: string, expand: Array<string> = []) =>
-  apiClient.get<User>(`${getPublicApiUrl()}/users/${userId}`)
+  apiClient.get<User>(`${publicApiUrl}/users/${userId}`);
 
-export const login = (data: any) =>
-  apiClient.post(`${getAjaxApiUrl()}/sessions`, data)
+export const login = (data: any) => apiClient.post(`${ajaxApiUrl}/sessions`, data);
 
-export const logout = () =>
-  apiClient.delete(`${getAjaxApiUrl()}/sessions`)
+export const loginViaOauth2Plugin = (pluginId: string, code: string, redirectUri: string) => {
+  let params = new URLSearchParams();
+  params.append("code", code);
+  params.append("redirect_uri", redirectUri);
+
+  return apiClient.get(`${ajaxApiUrl}/oauth2_plugins/${pluginId}/authorized?${params.toString()}`);
+};
+
+export const logout = () => apiClient.delete(`${ajaxApiUrl}/sessions`);

@@ -94,7 +94,8 @@ import { Dictionary } from "vue-router/types/router";
 import { UserModule } from "../../store/modules/user";
 import { AppModule } from "../../store/modules/app";
 import { OauthPlugin } from "../../api/types";
-import { coreConfig } from "../../config";
+import { appConfig } from "../../config";
+import { ajaxApiUrl } from "../../api/api-client";
 
 @Component({
   name: "Login",
@@ -102,6 +103,7 @@ import { coreConfig } from "../../config";
 })
 export default class Login extends Vue {
   isLoading = false;
+  isOauth = false;
   error = "";
   redirect: string = null;
   otherQuery: Dictionary<string | string[]> = {};
@@ -136,10 +138,12 @@ export default class Login extends Vue {
 
   getAuthorizeUrl(plugin: OauthPlugin) {
     let next = this.$route.query.next;
-    let state = {};
+    let state = {
+      plugin: plugin.id
+    };
     if(next) state['next'] = next;
 
-    let redirectUri = window.location.origin + "/" + `${coreConfig.url}/login/oauth2/${plugin.id}`;
+    let redirectUri = window.location.origin + `/oauth2/authorized`;
 
     let params = new URLSearchParams();
     params.append('response_type', 'code')

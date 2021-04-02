@@ -67,10 +67,10 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import CardComponent from "../components/CardComponent.vue";
-import { coreConfig } from "../config";
+import { appConfig } from "../config";
 import { UserModule } from "../store/modules/user";
 import { AppModule } from "../store/modules/app";
-
+import { ajaxApiUrl } from "../api/api-client";
 
 import axios from "axios";
 import { getServerStatus } from "../api/server-status";
@@ -114,7 +114,7 @@ export default class IniitalizeForm extends Vue {
           body: JSON.stringify({})
         };
 
-      axios.post(`${coreConfig.url}/initialize`, {
+      axios.post(`${ajaxApiUrl}/initialize`, {
           username: this.username,
           password: this.password,
           email: this.email
